@@ -96,8 +96,8 @@ window.onload = function () {
     game.load.spritesheet('coin', 'assets/coin.png', 36, 44);
     game.load.spritesheet('badge', 'assets/badge.png', 42, 54);
     // add a poison
-    game.load.spritesheet('poison', 'poison.png', 32, 32);
-    game.load.spritesheet('star', 'star.png', 32, 32);
+    game.load.spritesheet('poison', 'assets/poison.png', 32, 32);
+    game.load.spritesheet('star', 'assets/star.png', 32, 32);
 
   }
 
