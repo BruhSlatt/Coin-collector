@@ -71,6 +71,7 @@ function itemHandler(player, item) {
     currentScore = currentScore + 10;
  } else if (item.key == 'poison') { // substract 25 points if its a poison
     currentScore = currentScore - 25;
+    lose = true
  } else { // add 25 if item is a star
     currentScore = currentScore + 25;
  }
@@ -93,7 +94,7 @@ window.onload = function () {
   
   // before the game begins
   function preload() {
-    game.stage.backgroundColor = '##D395FF';
+    game.stage.backgroundColor = '#D395FF';
     
     //Load images
     game.load.image('platform', 'assets/platform_1.png');
@@ -101,7 +102,7 @@ window.onload = function () {
 
     
     //Load spritesheets
-    game.load.spritesheet('player', 'assets/chalkers.png', 48, 62);
+    game.load.spritesheet('player', 'assets/brown.png', 48, 62);
     game.load.spritesheet('coin', 'assets/coin.png', 36, 44);
     game.load.spritesheet('badge', 'assets/badge.png', 42, 54);
     // add a poison
@@ -142,13 +143,13 @@ window.onload = function () {
     // is the left cursor key presssed?
     if (cursors.left.isDown) {
       player.animations.play('walk', 10, true);
-      player.body.velocity.x = -300;
+      player.body.velocity.x = -500;
       player.scale.x = - 1;
     }
     // is the right cursor key pressed?
     else if (cursors.right.isDown) {
       player.animations.play('walk', 10, true);
-      player.body.velocity.x = 300;
+      player.body.velocity.x = 500;
       player.scale.x = 1;
     }
     // player doesn't move
