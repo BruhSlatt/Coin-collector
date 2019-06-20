@@ -8,11 +8,12 @@ var cursors;
 var jumpButton;
 var text;
 var winningMessage;
+var losingMessage;
 var won = false;
-var currentScore = 90;
-var winningScore = 100;
-
-// add collectable items to the game
+var currentScore = 0;
+var winningScore = 105;
+var lose = false;
+// collectable items to the game
 function addItems() {
   items = game.add.physicsGroup();
   createItem(375, 400, 'coin');
@@ -83,14 +84,16 @@ function badgeHandler(player, badge) {
   badge.kill();
   won = true;
 }
+function Loser(){
 
+lose = true}
 // setup game when the web page loads
 window.onload = function () {
   game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
   
   // before the game begins
   function preload() {
-    game.stage.backgroundColor = '#5db1ad';
+    game.stage.backgroundColor = '##D395FF';
     
     //Load images
     game.load.image('platform', 'assets/platform_1.png');
@@ -124,11 +127,13 @@ window.onload = function () {
     text = game.add.text(16, 16, "SCORE: " + currentScore, { font: "bold 24px Arial", fill: "white" });
     winningMessage = game.add.text(game.world.centerX, 275, "", { font: "bold 48px Arial", fill: "white" });
     winningMessage.anchor.setTo(0.5, 1);
+    losingMessage = game.add.text(game.world.centerX, 275, "", { font: "bold 48px Arial", fill: "white" });
+    losingMessage.anchor.setTo(0.5, 1);
   }
 
   // while the game is running
   function update() {
-    text.text = "SCORE: " + currentScore;
+    text.text = "CASH MONEY: " + currentScore;
     game.physics.arcade.collide(player, platforms);
     game.physics.arcade.overlap(player, items, itemHandler);
     game.physics.arcade.overlap(player, badges, badgeHandler);
@@ -155,8 +160,18 @@ window.onload = function () {
       player.body.velocity.y = -400;
     }
     // when the player winw the game
+    if (currentScore < 0){
+      losingMessage.text = "You lose loser";
+      player.body.velocity.y = 0;
+      player.body.velocity.x = 0;
+      player.animations.stop();
+    
+    }
     if (won) {
       winningMessage.text = "YOU WIN!!!";
+      player.body.velocity.y = 0;
+      player.body.velocity.x = 0;
+      player.animations.stop();
     }
   }
 
